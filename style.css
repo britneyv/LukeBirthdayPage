@@ -1,0 +1,204 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #89ece4; /* Light beige background */
+    padding-top: 50px; /* Stop balloons below the top edge */
+}
+
+#music-controls {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+#volume-slider {
+    transform: rotate(180deg); /* Flips the slider horizontally */
+    margin-left: 10px; /* Space between play/pause button and volume slider */
+    z-index: 2;
+}
+
+#balloon-container {
+    position: absolute, center;
+    top: 20px; /* Offset for the top padding */
+    width: 90%;
+    height: calc(100% - 50px); /* Reduce the height of the container by the top padding */
+}
+
+.balloon, .moon-balloon {
+    font-family: cursive;
+    display: inline-block;
+    width: 100px; /* Larger balloons */
+    height: 130px; /* Larger balloons */
+    color: black;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 110px;
+    font-size: 50px;
+    font-weight: normal;
+    position: absolute;
+    bottom: -100px; /* Start off-screen for .balloon */
+    animation: float 8s linear forwards; /* Animation for .balloon */
+    z-index: 3;
+}
+
+/* Specific start position for 'Moon' balloons */
+.moon-balloon {
+    bottom: -250px; /* Start off-screen for .moon-balloon */
+    animation: floatMoon 8s linear forwards; /* Separate animation for .moon-balloon */
+}
+
+/* Adjusting z-index for overlapping text on 'Moon' balloons */
+.moon-balloon:not(:first-child) {
+    z-index: 4;
+}
+.moon-balloon:first-child {
+    z-index: 5;
+}
+
+/* String for the balloon with wiggle animation */
+.balloon:after, .moon-balloon:after {
+    content: '';
+    position: absolute;
+    top: 130px;
+    left: 50px; /* Center string below the balloon */
+    width: 2px;
+    height: 120px; /* Length of the string */
+    background: #807777; /* Color of the string */
+    animation: wiggle 2s ease-in-out infinite;
+}
+
+#cake-container {
+    position: absolute;
+    left: 50%;
+    bottom: 10%;
+    transform: translateX(-50%);
+    width: 900px; /* Adjusted width for a wider cake */
+    height: 200px;
+    background-color: #490505; /* Brown color for the cake */
+    border-radius: 0 0 10px 10px; /* Rounded bottom corners */
+    overflow: visible; /* Ensure nothing is hidden */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 2;
+}
+
+#middle-icing {
+    position: absolute;
+    top: 42%; /* Adjust this to position the middle icing correctly */
+    width: 100%; /* Slightly less than the cake width for visual effect */
+    height: 30px; /* Thickness of the middle icing layer */
+    background-color: #310101; /* Icing color */
+    z-index: 10; /* Ensure it's above the cake base */
+}
+
+#cake-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30px; /* Height of the top icing */
+    bottom: 100%;
+    left: 0;
+    background-color: #fff; /* White icing */
+    border-radius: 10px 10px 0 0; /* Rounded top */
+}
+
+#cake-container:after {
+    content: '';
+    position: absolute;
+    bottom: -15px; /* Position the platter below the cake */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 950px; /* Platter is wider than the cake */
+    height: 10px; /* Thickness of the platter */
+    background-color: #fff; /* Platter color */
+}
+
+#candles-container {
+    position: absolute;
+    width: 100%;
+    height: 50px; /* Height to accommodate the candles */
+    top: -50px; /* Move up a bit if the candles need to be higher on the cake */
+    display: flex;
+    justify-content: space-around; /* Evenly space out the candles */
+    align-items: flex-start; /* Align candles to the top of the container */
+}
+
+.candle {
+    width: 15px;
+    height: 90px; /* Candle height */
+    top: -50px;
+    background-color: #0165a0; /* Candle color */
+    margin: 0 2px; /* Adjust spacing between candles if needed */
+    border-radius: 10px 10px 0 0; /* Rounded top of the candle */
+    position: relative;
+}
+
+.flame {
+    width: 15px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    top: -30px; /* Adjust based on your candle design */
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: linear-gradient(orange, yellow, orange, red);
+    animation: flicker 1.5s infinite alternate;
+}
+
+.sprinkle {
+    position: absolute;
+    width: 5px;
+    height: 20px;
+    border-radius: 2px;
+    z-index: 1;
+}
+
+/* Adjust keyframes to float to just below the top padding */
+@keyframes float {
+    0% { 
+        bottom: 0; /* Start at the bottom of the balloon container */
+    }
+    100% { 
+        /* Adjust this value to control the stopping position, making it higher */
+        bottom: calc(100% - 100px); /* Previously might be set to include additional padding */
+    }
+}
+
+/* Additional keyframes for "Moon" balloons to ensure they stop under "Happy Birthday" */
+@keyframes floatMoon {
+    0% { 
+        bottom: 0; /* Start at the bottom of the balloon container */
+    }
+    100% { 
+        /* Stop slightly lower than the Happy Birthday balloons */
+        bottom: calc(100% - 250px); /* Adjust this value to position under Happy Birthday balloons */
+    }
+}
+
+/* Adjust keyframes for the string wiggling */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(3deg); }
+    75% { transform: rotate(-3deg); }
+}
+
+@keyframes flicker {
+    0%, 100% {
+        background-image: linear-gradient(orange, yellow, orange, red);
+    }
+    25% {
+        background-image: linear-gradient(orange, yellow 60%, orange);
+    }
+    50% {
+        background-image: linear-gradient(orange 10%, yellow, red 90%);
+    }
+    75% {
+        background-image: linear-gradient(orange, yellow 50%, red);
+    }
+}
