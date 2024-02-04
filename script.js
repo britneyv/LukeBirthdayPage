@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         const modal = document.getElementById('modal');
         modal.style.display = "block";
-    }, 8000); // Adjust time to match the balloon animation duration
+    }, 8500); // Adjust time to match the balloon animation duration
 
     // Close modal functionality
     document.getElementById('closeModal').onclick = function() {
